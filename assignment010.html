@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closure Example</title>
+</head>
+<body>
+  <h1>Closure Demonstration</h1>
+  <p>Open the console to see the output.</p>
+
+  <script>
+    function outerFunction() {
+      let message = "Hello from Closure!";
+
+      function innerFunction() {
+        console.log(message);
+      }
+
+      return innerFunction;
+    }
+
+    // Demonstrate closure
+    const storedFunction = outerFunction(); 
+    storedFunction(); // Logs: "Hello from Closure!"
+  </script>
+</body>
+</html>
