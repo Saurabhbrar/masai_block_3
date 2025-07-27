@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global and Function Context</title>
+</head>
+<body>
+  <h1>Global and Function Execution Context</h1>
+  <p>Check the console for output.</p>
+
+  <script>
+    let age = 25;
+
+    function displayAge() {
+      console.log("Current Age:", age);
+    }
+
+    function changeAge() {
+      age = 30;
+      console.log("Age updated to:", age);
+    }
+
+    displayAge();
+    changeAge();
+    displayAge();
+  </script>
+</body>
+</html>
