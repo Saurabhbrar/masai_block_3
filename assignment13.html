@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-commerce Checkout System</title>
+</head>
+<body>
+  <h1>Checkout System</h1>
+  <p>Open the console to see the results.</p>
+
+  <script>
+    const checkout = {
+      items: [],
+      total: 0,
+
+      addItem(item) {
+        // Convert price to number if it's a string
+        const price = Number(item.price);
+
+        if (isNaN(price) || price <= 0) {
+          console.log(`Invalid price for item "${item.name}".`);
+          return;
+        }
+
+        // Add the item with validated price
+        this.items.push({ ...item, price });
+        this.total += price;
+        console.log(`Added "${item.name}" for $${price.toFixed(2)}.`);
+      },
+
+      getTotal() {
+        return `Total: $${this.total.toFixed(2)}`;
+      }
+    };
+
+    // Test Cases
+    checkout.addItem({ name: "Coffee Maker", price: "99.95" }); // Corrected type coercion
+    checkout.addItem({ name: "Milk", price: 3.50 });
+    checkout.addItem({ name: "Invalid Item", price: "abc" }); // Invalid
+
+    console.log(checkout.getTotal());
+  </script>
+</body>
+</html>
