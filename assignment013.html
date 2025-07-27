@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Account Closure</title>
+</head>
+<body>
+  <h1>Bank Account Example</h1>
+  <p>Open the console to see the output.</p>
+
+  <script>
+    function createBankAccount(initialBalance) {
+      let balance = Number(initialBalance);
+
+      return {
+        deposit(amount) {
+          if (amount <= 0 || isNaN(amount)) {
+            return "Invalid deposit amount.";
+          }
+          balance += amount;
+          return balance;
+        },
+        withdraw(amount) {
+          if (amount <= 0 || isNaN(amount)) {
+            return "Invalid withdraw amount.";
+          }
+          if (amount > balance) {
+            return "Insufficient funds.";
+          }
+          balance -= amount;
+          return balance;
+        },
+        getBalance() {
+          return balance;
+        }
+      };
+    }
+
+    // Example Usage
+    const account = createBankAccount(100);
+    console.log(account.deposit(50));    // Output: 150
+    console.log(account.withdraw(30));   // Output: 120
+    console.log(account.getBalance());   // Output: 120
+  </script>
+</body>
+</html>
