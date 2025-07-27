@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closure Counter</title>
+</head>
+<body>
+  <h1>Closure Counter Example</h1>
+  <p>Open the console to see the counter in action.</p>
+
+  <script>
+    function createCounter() {
+      let count = 0; // Private variable
+
+      return {
+        increment() {
+          count++;
+          return count;
+        },
+        getCount() {
+          return count;
+        }
+      };
+    }
+
+    // Usage example
+    const counter = createCounter();
+
+    console.log(counter.increment()); // Output: 1
+    console.log(counter.increment()); // Output: 2
+    console.log(counter.getCount());  // Output: 2
+  </script>
+</body>
+</html>
