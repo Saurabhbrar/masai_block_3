@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Book Tracker</title>
+</head>
+<body>
+  <h1>Library Book Collection</h1>
+
+  <h3>Add a New Book</h3>
+  <input type="text" id="title" placeholder="Book Title">
+  <input type="text" id="author" placeholder="Author">
+  <input type="number" id="year" placeholder="Year">
+  <button onclick="addBookFromForm()">Add Book</button>
+
+  <h3>Find a Book</h3>
+  <input type="text" id="searchTitle" placeholder="Enter Title to Search">
+  <button onclick="searchBook()">Find Book</button>
+
+  <h3>Remove a Book</h3>
+  <input type="text" id="removeTitle" placeholder="Enter Title to Remove">
+  <button onclick="removeBookFromForm()">Remove Book</button>
+
+  <h3>Books in Library:</h3>
+  <ul id="bookList"></ul>
+
+  <script>
+    const library = {
+      books: [{ title: "The Hobbit", author: "J.R.R. Tolkien", year: 1937 }],
+
+      addBook(book) {
+        if (!book.title || !book.author || !book.year) {
+          alert("Book information is incomplete.");
+          return false;
+        }
+        const existingBook = this.findBookByTitle(book.title);
+        if (existingBook) {
+          alert(`Book titled "${book.title}" already exists.`);
+          return false;
+        }
+        this.books.push(book);
+        alert(`Book "${book.title}" added successfully.`);
+        displayBooks();
+        return true;
+      },
+
+      findBookByTitle(title) {
+        return this.books.find(b => b.title.toLowerCase() === title.toLowerCase());
+      },
+
+      removeBook(title) {
+        const index = this.books.findIndex(b => b.title.toLowerCase() === title.toLowerCase());
+        if (index !== -1) {
+          const removed = this.books.splice(index, 1);
+          alert(`Book "${removed[0].title}" removed.`);
+          displayBooks();
+        } else {
+          alert("Book not found.");
+        }
+      }
+    };
+
+    function displayBooks() {
+      const list = document.getElementById("bookList");
+      list.innerHTML = "";
+      library.books.forEach(book => {
+        const li = document.createElement("li");
+        li.textContent = `${book.title} by ${book.author} (${book.year})`;
+        list.appendChild(li);
+      });
+    }
+
+    function addBookFromForm() {
+      const title = document.getElementById("title").value.trim();
+      const author = document.getElementById("author").value.trim();
+      const year = document.getElementById("year").value;
+      library.addBook({ title, author, year: Number(year) });
+    }
+
+    function searchBook() {
+      const title = document.getElementById("searchTitle").value.trim();
+      const book = library.findBookByTitle(title);
+      if (book) {
+        alert(`Found: ${book.title} by ${book.author} (${book.year})`);
+      } else {
+        alert("Book not found.");
+      }
+    }
+
+    function removeBookFromForm() {
+      const title = document.getElementById("removeTitle").value.trim();
+      library.removeBook(title);
+    }
+
+    // Initial display
+    displayBooks();
+  </script>
+</body>
+</html>
