@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closure Function List</title>
+</head>
+<body>
+  <h1>Closure Function List (Debugged)</h1>
+  <p>Check console for outputs.</p>
+
+  <script>
+    // -------- Solution 1: Using let --------
+    function createFunctionListWithLet() {
+      let functions = [];
+      for (let i = 0; i < 5; i++) {
+        functions.push(function () {
+          console.log("Using let - Index:", i);
+        });
+      }
+      return functions;
+    }
+
+    const letFunctions = createFunctionListWithLet();
+    letFunctions[0](); // "Index: 0"
+    letFunctions[1](); // "Index: 1"
+    letFunctions[4](); // "Index: 4"
+
+    // -------- Solution 2: Using IIFE --------
+    function createFunctionListWithIIFE() {
+      let functions = [];
+      for (var i = 0; i < 5; i++) {
+        (function(index) {
+          functions.push(function () {
+            console.log("Using IIFE - Index:", index);
+          });
+        })(i);
+      }
+      return functions;
+    }
+
+    const iifeFunctions = createFunctionListWithIIFE();
+    iifeFunctions[0](); // "Index: 0"
+    iifeFunctions[2](); // "Index: 2"
+    iifeFunctions[4](); // "Index: 4"
+  </script>
+</body>
+</html>
